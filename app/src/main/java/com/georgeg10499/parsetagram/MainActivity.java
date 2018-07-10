@@ -1,7 +1,10 @@
 package com.georgeg10499.parsetagram;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -17,15 +20,27 @@ public class MainActivity extends AppCompatActivity {
     private EditText etUsername;
     private EditText etPassword;
     private Button btnLogin;
+    private Button btnSignUp;
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.drawable.icon);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        //getSupportActionBar().setLogo(R.drawable.icon);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setBackgroundDrawable(getDrawable(R.drawable.insta_background1));
+        //getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#cb48e2")));
+
         etUsername = (EditText) findViewById(R.id.etUserName);
         etPassword = (EditText) findViewById(R.id.etPassword);
         btnLogin = (Button) findViewById(R.id.btnLogin);
+        btnSignUp = (Button) findViewById(R.id.btnSignUp);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,6 +48,13 @@ public class MainActivity extends AppCompatActivity {
                 final String username = etUsername.getText().toString();
                 final String password = etPassword.getText().toString();
                 login(username, password);
+            }
+        });
+
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signUp();
             }
         });
     }
@@ -53,6 +75,11 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
 
+    private void signUp() {
+        Intent intent = new Intent(MainActivity.this, SignUp.class);
+        startActivity(intent);
+        finish();
     }
 }

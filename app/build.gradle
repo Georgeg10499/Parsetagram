@@ -3,6 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 27
     defaultConfig {
+        vectorDrawables.useSupportLibrary = true
         applicationId "com.georgeg10499.parsetagram"
         minSdkVersion 18
         targetSdkVersion 27
