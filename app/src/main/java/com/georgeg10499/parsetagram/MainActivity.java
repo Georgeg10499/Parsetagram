@@ -57,6 +57,15 @@ public class MainActivity extends AppCompatActivity {
                 signUp();
             }
         });
+
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        if (currentUser != null) {
+            // do stuff with the user
+            final Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+            startActivity(intent);
+        } else {
+
+        }
     }
 
     private void login(String username, String password){

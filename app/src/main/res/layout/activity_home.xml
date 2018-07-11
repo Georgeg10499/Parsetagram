@@ -6,19 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
-    <android.support.design.widget.AppBarLayout
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:layout_height="?actionBarSize"
+        android:paddingEnd="@dimen/keyline_normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-    </android.support.design.widget.AppBarLayout>
+            android:layout_height="match_parent"
+            android:tint="@android:color/black"
+            app:srcCompat="@drawable/ic_instagram_brand" />
+    </android.support.v7.widget.Toolbar>
 
     <Button
         android:id="@+id/btnRefresh"
@@ -58,4 +60,37 @@
         android:layout_marginTop="173dp"
         app:srcCompat="@android:drawable/ic_menu_camera" />
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:minHeight="?attr/actionBarSize" />
+
+    <ImageView
+        android:id="@+id/ivCapture"
+        android:layout_width="43dp"
+        android:layout_height="33dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="11dp"
+        app:srcCompat="@drawable/instagram_new_post_filled_24" />
+
+    <ImageView
+        android:id="@+id/ivHome"
+        android:layout_width="40dp"
+        android:layout_height="35dp"
+        android:layout_alignStart="@+id/btnRefresh"
+        android:layout_alignTop="@+id/ivCapture"
+        app:srcCompat="@drawable/instagram_home_filled_24" />
+
+    <ImageView
+        android:id="@+id/ivLogout"
+        android:layout_width="35dp"
+        android:layout_height="36dp"
+        android:layout_alignEnd="@+id/btnRefresh"
+        android:layout_alignTop="@+id/ivCapture"
+        android:clickable="true"
+        app:srcCompat="@drawable/instagram_user_filled_24" />
 </RelativeLayout>

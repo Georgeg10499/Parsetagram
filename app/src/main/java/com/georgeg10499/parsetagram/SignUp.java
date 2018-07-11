@@ -1,5 +1,6 @@
 package com.georgeg10499.parsetagram;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -51,6 +52,10 @@ public class SignUp extends AppCompatActivity {
                         }
                     }
                 });
+
+                Intent home = new Intent(SignUp.this, HomeActivity.class);
+                startActivity(home);
+                finish();
             }
         });
     }

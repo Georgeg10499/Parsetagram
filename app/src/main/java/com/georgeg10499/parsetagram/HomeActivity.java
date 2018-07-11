@@ -32,6 +32,7 @@ public class HomeActivity extends AppCompatActivity {
     private EditText etDescription;
     private Button btnRefresh;
     private Button btnCreate;
+    private ImageView ivLogout;
 
     //20180705_211953.jpg
     private String imagePath;
@@ -45,6 +46,7 @@ public class HomeActivity extends AppCompatActivity {
         btnCreate = (Button) findViewById(R.id.btnCreate);
         btnRefresh = (Button) findViewById(R.id.btnRefresh);
         ivImage = (ImageView) findViewById(R.id.ivImage);
+        ivLogout = (ImageView) findViewById(R.id.ivLogout);
 
         btnRefresh.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +83,15 @@ public class HomeActivity extends AppCompatActivity {
                         android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(galleryIntent , RESULT_GALLERY );
 
+            }
+        });
+
+        ivLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent logout = new Intent(HomeActivity.this, LogoutActivity.class);
+                startActivity(logout);
+                finish();
             }
         });
 
@@ -197,7 +208,4 @@ public class HomeActivity extends AppCompatActivity {
         });
 
     }
-
-
-
 }

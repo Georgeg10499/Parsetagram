@@ -7,22 +7,21 @@
     android:background="@drawable/insta_background1"
     android:theme="@style/CustomActionBarTheme"
     tools:context=".MainActivity">
-
-    <android.support.design.widget.AppBarLayout
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:layout_height="?actionBarSize"
+        android:paddingEnd="@dimen/keyline_normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="#cb48e2"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-    </android.support.design.widget.AppBarLayout>
+            android:layout_height="match_parent"
+            android:tint="@android:color/black"
+            app:srcCompat="@drawable/ic_instagram_brand" />
+    </android.support.v7.widget.Toolbar>
 
 
     <EditText
