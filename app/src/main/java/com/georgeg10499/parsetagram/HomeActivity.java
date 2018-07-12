@@ -1,19 +1,15 @@
 package com.georgeg10499.parsetagram;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.View;
+import android.view.MenuItem;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
-
-import com.georgeg10499.parsetagram.Model.Post;
-import com.parse.FindCallback;
-import com.parse.ParseException;
-
-import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -21,90 +17,49 @@ public class HomeActivity extends AppCompatActivity {
     ImageButton ibProfile;
     ImageButton ibCapture;
 
+    FrameLayout flContainer;
+    FragmentTransaction fragmentTransaction;
+
+    Fragment feedFragment;
+    Fragment cameraFragment;
+    Fragment profileFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        ibCapture = (ImageButton) findViewById(R.id.ibCapture);
-        ibFeed = (ImageButton) findViewById(R.id.ibFeed);
-        ibProfile = (ImageButton) findViewById(R.id.ibProfile);
+        final FragmentManager fragmentManager = getSupportFragmentManager();
 
-        final Post.Query postsQuery = new Post.Query();
-        postsQuery
-                .getTop()
-                .withUser();
+        fragmentTransaction = fragmentManager.beginTransaction();
 
+        // define your fragments here
+        feedFragment = new FeedFragment();
+        cameraFragment = new CameraFragment();
+        profileFragment = new ProfileFragment();
 
-        postsQuery.findInBackground(new FindCallback<Post>() {
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void done(List<Post> objects, ParseException e) {
-                if (e==null){
-                    for (int i = 0;i<objects.size(); i++){
-                        Log.d("FeedActivity", "Post ["+i+"] = "
-                                + objects.get(i).getDescription()
-                                + "\n username = " + objects.get(i).getUser().getUsername());
-                    }
-                } else {
-                    e.printStackTrace();
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                fragmentTransaction = fragmentManager.beginTransaction();
+
+                switch (item.getItemId()) {
+                    case R.id.fragment_feed:
+                        fragmentTransaction.replace(R.id.flContainer, feedFragment).commit();
+                        return true;
+                    case R.id.fragment_camera:
+                        fragmentTransaction.replace(R.id.flContainer, cameraFragment).commit();
+                        return true;
+                    case R.id.fragment_profile:
+                        fragmentTransaction.replace(R.id.flContainer, profileFragment).commit();
+                        return true;
                 }
+                return true;
             }
         });
 
     }
-
-    public void changeFragment(View view){
-        Fragment fragment;
-
-        if (view == findViewById(R.id.ibFeed)) {
-
-            ibCapture.setImageResource(R.drawable.instagram_new_post_outline_24);
-            ibFeed.setImageResource(R.drawable.instagram_home_filled_24);
-            ibProfile.setImageResource(R.drawable.instagram_user_outline_24);
-            FeedFragment feedFragment = new FeedFragment();
-            fragment = feedFragment;
-
-            FragmentManager fm = getSupportFragmentManager();
-            FragmentTransaction ft = fm.beginTransaction();
-            ft.replace(R.id.fragmentWindow, fragment);
-
-            ft.commit();
-
-
-        } else if (view == findViewById(R.id.ibCapture)) {
-
-            ibCapture.setImageResource(R.drawable.instagram_new_post_filled_24);
-            ibFeed.setImageResource(R.drawable.instagram_home_outline_24);
-            ibProfile.setImageResource(R.drawable.instagram_user_outline_24);
-
-            CameraFragment cam = new CameraFragment();
-            fragment = cam;
-
-            FragmentManager fm = getSupportFragmentManager();
-            FragmentTransaction ft = fm.beginTransaction();
-            ft.replace(R.id.fragmentWindow, fragment);
-
-            ft.commit();
-
-        } else if (view == findViewById(R.id.ibProfile)) {
-
-
-            ibCapture.setImageResource(R.drawable.instagram_new_post_outline_24);
-            ibFeed.setImageResource(R.drawable.instagram_home_outline_24);
-            ibProfile.setImageResource(R.drawable.instagram_user_filled_24);
-
-            ProfileFragment profileFragment = new ProfileFragment();
-            fragment = profileFragment;
-
-            FragmentManager fm = getSupportFragmentManager();
-            FragmentTransaction ft = fm.beginTransaction();
-            ft.replace(R.id.fragmentWindow, fragment);
-
-            ft.commit();
-        }
-
-    }
-
-
 
 }
