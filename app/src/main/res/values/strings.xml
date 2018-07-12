@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">Parsetagram</string>
     <string name="title_activity_home">HomeActivity</string>
+    <string name="create">Create</string>
+    <string name="select_photo">Select Photo</string>
 </resources>
