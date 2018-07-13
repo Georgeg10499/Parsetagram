@@ -2,7 +2,7 @@ package com.georgeg10499.parsetagram;
 
 import android.app.Application;
 
-import com.georgeg10499.parsetagram.Model.Post;
+import com.georgeg10499.parsetagram.Model.ImagePost;
 import com.parse.Parse;
 import com.parse.ParseObject;
 
@@ -12,7 +12,7 @@ public class ParseApp extends Application{
     public void onCreate() {
         super.onCreate();
 
-        ParseObject.registerSubclass(Post.class);
+        ParseObject.registerSubclass(ImagePost.class);
         final Parse.Configuration configuration = new Parse.Configuration.Builder(this)
                 .applicationId("berk-mex")
                 .clientKey("deque-llaveTh3Awes0m3T3am")

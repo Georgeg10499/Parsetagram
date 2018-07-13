@@ -20,15 +20,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.georgeg10499.parsetagram.Model.Post;
-import com.parse.FindCallback;
+import com.georgeg10499.parsetagram.Model.ImagePost;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.io.File;
-import java.util.List;
 
 public class CameraFragment extends Fragment{
     private static final int SELECT_PICTURE = 1;
@@ -60,6 +58,8 @@ public class CameraFragment extends Fragment{
         btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Toast.makeText(activity, "Clicked Post", Toast.LENGTH_SHORT).show();
                 final String description = etDescription.getText().toString();
                 final ParseUser currUser = ParseUser.getCurrentUser();
                 final File image = photoFile;
@@ -80,11 +80,16 @@ public class CameraFragment extends Fragment{
         super.onActivityCreated(savedInstanceState);
         activity = getActivity();
 
+        //Toast.makeText(activity, "Enter Camera", Toast.LENGTH_SHORT).show();
+
         btnSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // create Intent to take a picture and return control to the calling application
+
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+                Toast.makeText(activity, "Enter Camera", Toast.LENGTH_SHORT).show();
                 // Create a File reference to access to future access
                 photoFile = getPhotoFileUri(photoFileName);
 
@@ -106,22 +111,24 @@ public class CameraFragment extends Fragment{
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Toast.makeText(activity, "Picture was taken!", Toast.LENGTH_SHORT).show();
         if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
                 // by this point we have the camera photo on disk
+                Toast.makeText(activity, "Set up image", Toast.LENGTH_SHORT).show();
                 Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
-                // RESIZE BITMAP, see section below
-                ivImage.setImageBitmap(takenImage);
-            } else { // Result was a failure
-                Toast.makeText(activity, "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
-            }
-//                // See code above
+//                // RESIZE BITMAP
 //                Uri takenPhotoUri = getPhotoFileUri(photoFileName);
 //                // by this point we have the camera photo on disk
 //                Bitmap rawTakenImage = BitmapFactory.decodeFile(takenPhotoUri.getPath());
 //                // See BitmapScaler.java: https://gist.github.com/nesquena/3885707fd3773c09f1bb
 //                Bitmap resizedBitmap = BitmapScaler.scaleToFitWidth(rawTakenImage, SOME_WIDTH);
 
+
+                ivImage.setImageBitmap(takenImage);
+            } else { // Result was a failure
+                Toast.makeText(activity, "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -142,41 +149,6 @@ public class CameraFragment extends Fragment{
     }
 
 
-    private void loadTopPosts() {
-        final Post.Query postsQuery = new Post.Query();
-        postsQuery.getTop().withUser();
-        postsQuery.findInBackground(new FindCallback<Post>() {
-            @Override
-            public void done(List<Post> objects, ParseException e) {
-                if (e == null){
-                    for(int i = 0; i < objects.size(); i++) {
-                        Log.d("HomeActivity", "Post[" + i + "] = " + objects.get(i).getDescription()
-                                + "\nusername = " + objects.get(i).getUser().getUsername());
-                    }
-                } else {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
-//    public File getPhotoFileUri(String fileName) {
-//        // Get safe storage directory for photos
-//        // Use `getExternalFilesDir` on Context to access package-specific directories.
-//        // This way, we don't need to request external read/write runtime permissions.
-//        File mediaStorageDir = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), APP_TAG);
-//
-//        // Create the storage directory if it does not exist
-//        if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()){
-//            Log.d(APP_TAG, "failed to create directory");
-//        }
-//
-//        // Return the file target for the photo based on filename
-//        File file = new File(mediaStorageDir.getPath() + File.separator + fileName);
-//
-//        return file;
-//    }
-
     private void createPost(final String description, final ParseFile imageFile, final ParseUser user) {
         imageFile.saveInBackground(new SaveCallback() {
             @Override
@@ -184,7 +156,7 @@ public class CameraFragment extends Fragment{
                 if (e == null) {
                     Log.d("Image", "Image saved");
 
-                    final Post newPost = new Post();
+                    final ImagePost newPost = new ImagePost();
                     newPost.setDescription(description);
                     newPost.setImage(imageFile);
                     newPost.setUser(user);
