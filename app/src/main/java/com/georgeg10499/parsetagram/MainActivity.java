@@ -2,6 +2,9 @@ package com.georgeg10499.parsetagram;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -10,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 
 import com.parse.LogInCallback;
 import com.parse.ParseException;
@@ -29,13 +33,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setIcon(R.drawable.icon);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+//        getSupportActionBar().setDisplayShowHomeEnabled(true);
+//        getSupportActionBar().setIcon(R.drawable.icon);
+//        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().hide();
         //getSupportActionBar().setLogo(R.drawable.icon);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
-        getSupportActionBar().setBackgroundDrawable(getDrawable(R.drawable.insta_background1));
-        //getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#cb48e2")));
+        //getSupportActionBar().setBackgroundDrawable(getDrawable(R.drawable.insta_background1));
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffff")));
+        //getSupportActionBar().setBackgroundDrawable(getDrawable(R.drawable.gradient_4));
+
+        RelativeLayout relativeLayout = findViewById(R.id.gradients);
+        AnimationDrawable animationDrawable = (AnimationDrawable) relativeLayout.getBackground();
+        animationDrawable.setEnterFadeDuration(2000);
+        animationDrawable.setExitFadeDuration(4000);
+        animationDrawable.start();
 
         etUsername = (EditText) findViewById(R.id.etUserName);
         etPassword = (EditText) findViewById(R.id.etPassword);
