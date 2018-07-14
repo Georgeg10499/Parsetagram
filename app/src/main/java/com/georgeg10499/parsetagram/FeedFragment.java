@@ -23,6 +23,13 @@ import java.util.List;
 
 
 public class FeedFragment extends Fragment {
+    private InteractionListener mListener;
+
+    public FeedFragment() {
+        // Required empty public constructor
+    }
+
+
     private SwipeRefreshLayout swipeContainer;
 
     //private HomeFragmentListener
@@ -76,6 +83,7 @@ public class FeedFragment extends Fragment {
         Toast.makeText(getActivity(), "Loading posts!", Toast.LENGTH_SHORT).show();
         final ImagePost.Query postsQuery = new ImagePost.Query();
         postsQuery.limit20().withUser();
+        postsQuery.orderByDescending("createdAt");
         postsQuery.findInBackground(new FindCallback<ImagePost>() {
             @Override
             public void done(List<ImagePost> objects, ParseException e) {

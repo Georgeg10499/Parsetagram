@@ -11,7 +11,8 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity{
+
 
     ImageButton ibFeed;
     ImageButton ibProfile;
@@ -40,6 +41,9 @@ public class HomeActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
 
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.flContainer, feedFragment).commit();
+
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -62,4 +66,10 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
+//    @Override
+//    public void onFragmentInteraction(String string) {
+//        //listened
+//        mSearchString = string;
+//        focusSearView();
+//    }
 }

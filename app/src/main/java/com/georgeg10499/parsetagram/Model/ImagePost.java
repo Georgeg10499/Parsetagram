@@ -24,6 +24,7 @@ public class ImagePost extends ParseObject {
         return getString(KEY_TITLE);
     }
 
+
     public void setDescription(String description) {
         put(KEY_DESCRIPTION, description);
     }

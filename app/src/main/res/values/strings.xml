@@ -2,7 +2,7 @@
     <string name="app_name">Parsetagram</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="create">Create</string>
-    <string name="select_photo">Select Photo</string>
+    <string name="select_photo">Take Photo</string>
     <string name="text_favorites">Feed</string>
     <string name="feed_item">FeedItem</string>
     <string name="camera_item">CameraItem</string>
