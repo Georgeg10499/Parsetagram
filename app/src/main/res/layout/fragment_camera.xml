@@ -14,7 +14,10 @@
         android:layout_alignParentStart="true"
         android:layout_marginBottom="147dp"
         android:text="@string/select_photo"
-        android:visibility="visible" />
+        android:visibility="visible"
+        android:background="@drawable/bg_gradient_button_rounded"
+        android:textAllCaps="false"
+        android:textColor="@color/white"/>
 
     <Button
         android:id="@+id/btnCreate"
@@ -23,7 +26,11 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="79dp"
-        android:text="@string/create" />
+        android:text="@string/create"
+        android:visibility="visible"
+        android:background="@drawable/bg_gradient_button_rounded"
+        android:textAllCaps="false"
+        android:textColor="@color/white"/>
 
 
     <ImageView
@@ -48,11 +55,15 @@
 
     <Button
         android:id="@+id/btnGallery"
-        android:layout_width="wrap_content"
+        android:layout_width="204dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/btnSelect"
-        android:text="Select from Gallery" />
+        android:background="@drawable/bg_gradient_button_rounded"
+        android:text="Select from Gallery"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:visibility="visible" />
 
 
 </RelativeLayout>

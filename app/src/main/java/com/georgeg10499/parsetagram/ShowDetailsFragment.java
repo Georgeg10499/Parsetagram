@@ -4,6 +4,7 @@ package com.georgeg10499.parsetagram;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,10 @@ import com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
 import com.georgeg10499.parsetagram.Model.ImagePost;
 import com.parse.ParseFile;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 public class ShowDetailsFragment extends Fragment {
 
@@ -49,6 +54,7 @@ public class ShowDetailsFragment extends Fragment {
 
         username.setText(post.getUser().getUsername());
         description.setText(post.getDescription());
+        timeSince.setText(getRelativeTimeAgo(post.getCreatedAt().toString()));
 
         loadPostImage(post.getImage(), image);
         loadAvatarImage(post.getAvatar(), avatar);
@@ -91,5 +97,22 @@ public class ShowDetailsFragment extends Fragment {
                     .into(avatarView);
 
         }
+    }
+
+    public String getRelativeTimeAgo(String rawDate) {
+        String twitterFormat = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
+        SimpleDateFormat sf = new SimpleDateFormat(twitterFormat, Locale.ENGLISH);
+        sf.setLenient(true);
+
+        String relativeDate = "";
+        try {
+            long dateMillis = sf.parse(rawDate).getTime();
+            relativeDate = DateUtils.getRelativeTimeSpanString(dateMillis,
+                    System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS).toString();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return relativeDate;
     }
 }

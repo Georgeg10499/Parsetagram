@@ -4,7 +4,7 @@
     <string name="create">Create</string>
     <string name="select_photo">Take Photo</string>
     <string name="text_favorites">Feed</string>
-    <string name="feed_item">FeedItem</string>
-    <string name="camera_item">CameraItem</string>
-    <string name="profile_item">ProfileItem</string>
+    <string name="feed_item">Feed</string>
+    <string name="camera_item">Camera</string>
+    <string name="profile_item">Profile</string>
 </resources>
