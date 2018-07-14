@@ -88,7 +88,7 @@ public class FeedFragment extends Fragment {
             @Override
             public void done(List<ImagePost> objects, ParseException e) {
                 if (e == null){
-                    Toast.makeText(getActivity(), "Add Posts", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getActivity(), "Add Posts", Toast.LENGTH_SHORT).show();
                     Log.d("HomeActivity", Integer.toString(objects.size()));
                     for(int i = 0; i < objects.size(); i++) {
 //                        Log.d("HomeActivity", "Post[" + i + "] = " + objects.get(i).getDescription()
@@ -100,7 +100,7 @@ public class FeedFragment extends Fragment {
                     postAdapter.addAll(objects);
                     postAdapter.notifyDataSetChanged();
                 } else {
-                    Toast.makeText(getActivity(), "null?", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getActivity(), "null?", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
             }

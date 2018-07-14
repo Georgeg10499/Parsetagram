@@ -111,7 +111,7 @@ public class CameraFragment extends Fragment{
 
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-                Toast.makeText(activity, "Enter Camera", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(activity, "Enter Camera", Toast.LENGTH_SHORT).show();
                 // Create a File reference to access to future access
                 photoFile = getPhotoFileUri(photoFileName);
 
@@ -147,7 +147,7 @@ public class CameraFragment extends Fragment{
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
                 // by this point we have the camera photo on disk
-                Toast.makeText(activity, "Set up image", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(activity, "Set up image", Toast.LENGTH_SHORT).show();
                 Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
 
                 ivImage.setImageBitmap(takenImage);
@@ -183,7 +183,7 @@ public class CameraFragment extends Fragment{
                     newPost.setDescription(description);
                     newPost.setImage(imageFile);
                     newPost.setUser(user);
-                    Toast.makeText(getActivity(), "Posting!", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getActivity(), "Posting!", Toast.LENGTH_SHORT).show();
                     newPost.saveInBackground(new SaveCallback() {
                         @Override
                         public void done(ParseException e) {
